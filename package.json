@@ -1,0 +1,17 @@
+{
+  "name": "@eyevinn/tsgen-svc",
+  "version": "0.1.0",
+  "description": "Transport Stream Generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eyevinn Technology <info@eyevinn.se>",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "restify": "^8.5.1",
+    "restify-errors": "^8.0.2",
+    "swagger-ui-restify": "^3.0.8"
+  }
+}
