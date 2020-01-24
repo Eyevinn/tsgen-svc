@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eyevinn Technology <info@eyevinn.se>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "debug": "^4.1.1",
     "restify": "^8.5.1",
