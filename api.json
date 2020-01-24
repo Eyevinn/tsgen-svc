@@ -1,1 +1,164 @@
-{}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Eyevinn TS Generator API",
+    "description": "Control API for the Eyevinn TS Generator",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/v1/streams": {
+      "get": {
+        "summary": "List available stream slots",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/model/streams"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/streams/{id}": {
+      "get": {
+        "summary": "Get status of a stream slot",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Stream ID",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/model/stream"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update state of a stream slot",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Stream ID",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/model/updateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/model/updateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model": {
+    "stream": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the stream slot"
+        },
+        "destAddress": {
+          "type": "string",
+          "description": "Destination address fort the stream"
+        },
+        "destPort": {
+          "type": "number",
+          "description": "Destination port for the stream"
+        },
+        "audioStreams": {
+          "type": "number",
+          "description": "Number of audio tracks in the stream"
+        },
+        "channels": {
+          "type": "number",
+          "description": "Number of channels in each audio track"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of test video",
+          "enum": [ "testsrc1080p25", "testsrc720p25" ]
+        },
+        "state": {
+          "type": "string",
+          "description": "Status of the stream slot",
+          "enum": [ "idle", "starting", "running", "stopping" ]
+        }
+      }
+    },
+    "updateRequest": {
+      "schema": {
+        "$ref": "#/model/stream"
+      },
+      "example": {
+        "id": 1,
+        "destAddress": "192.168.1.40",
+        "destPort": 1230,
+        "audioStreams": 4,
+        "channels": 2,
+        "type": "testsrc720p25",
+        "state": "starting"
+      }
+    },
+    "updateResponse": {
+      "schema": {
+        "$ref": "#/model/stream"
+      },
+      "example": {
+        "id": 1,
+        "destAddress": "192.168.1.40",
+        "destPort": 1230,
+        "audioStreams": 4,
+        "channels": 2,
+        "type": "testsrc720p25",
+        "state": "running"
+      }
+    },
+    "streams": {
+      "type": "array",
+      "items": {
+        "$ref": "#/model/stream"
+      }
+    }
+  }
+}
