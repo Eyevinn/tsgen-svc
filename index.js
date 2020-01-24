@@ -38,7 +38,7 @@ server.get("/healthcheck", (req, res, next) => {
 });
 
 // List all TS streams
-server.get("/api/streams", wrap(async (req, res, next) => {
+server.get("/api/v1/streams", wrap(async (req, res, next) => {
   debug(`req.url=${req.url}`);
 
   try {
@@ -53,7 +53,7 @@ server.get("/api/streams", wrap(async (req, res, next) => {
 }));
 
 // Get status of a TS stream
-server.get("/api/streams/:id", (req, res, next) => {
+server.get("/api/v1/streams/:id", (req, res, next) => {
   debug(`req.url=${req.url}`);
   debug(`params.id=${req.params.id}`);
 
@@ -69,7 +69,7 @@ server.get("/api/streams/:id", (req, res, next) => {
 });
 
 // Change status of a TS stream
-server.put("/api/streams/:id", wrap(async (req, res, next) => {
+server.put("/api/v1/streams/:id", wrap(async (req, res, next) => {
   debug(`req.url=${req.url}`);
   debug(`params.id=${req.params.id}`);
   debug("req.body=%o", req.body);
@@ -83,6 +83,10 @@ server.put("/api/streams/:id", wrap(async (req, res, next) => {
 
       if (req.body.state === "starting") {
         newStatus = await api.startStream(req.params.id, req.body.destAddress, req.body.destPort, audioStreams, channels, type)
+      } else if (req.body.state === "stopping") {
+        newStatus = await api.stopStream(req.params.id);
+      } else {
+        throw new Error("Invalid state requested, expecting [starting|stopping]");
       }
       debug(newStatus);
       res.send(200, newStatus);
