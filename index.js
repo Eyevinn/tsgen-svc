@@ -1,6 +1,7 @@
 const Restify = require("restify");
 const errs = require("restify-errors");
 const SwaggerUI = require("swagger-ui-restify");
+const RestifyCors = require("restify-cors-middleware");
 
 const debug = require("debug")("tsgen-svc");
 
@@ -18,6 +19,15 @@ let server = Restify.createServer();
 server.use(Restify.plugins.queryParser());
 server.use(Restify.plugins.bodyParser());
 
+// No CORS when devel
+if (process.env.NODE_ENV === "development") {
+  const cors = RestifyCors({
+    origins: ["*"]
+  });
+  server.pre(cors.preflight);
+  server.use(cors.actual);
+}
+
 // API Documentation
 const apiDocument = require("./api.json");
 server.get("/api/docs/*", ...SwaggerUI.serve);
@@ -25,7 +35,7 @@ server.get("/api/docs/", SwaggerUI.setup(apiDocument));
 
 // Management UI
 server.get("/web/*", Restify.plugins.serveStatic({
-  directory: "./mgmtui",
+  directory: "./out",
   file: "index.html",
   appendRequestPath: false
 }));
