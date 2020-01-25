@@ -7,9 +7,13 @@ $ docker build -t tsgen-svc:1 .
 $ docker run --rm -d -p 3000:3000 tsgen-svc:1
 ```
 
+Web user interface available at `{{BaseURL}}/web/`
+
+![Web GUI](tsgen-gui.png)
+
 API docs (Swagger) available at `{{BaseURL}}/api/docs/`
 
-## Usage
+## API Usage
 
 ### List available stream slots
 
