@@ -34,11 +34,7 @@ server.get("/api/docs/*", ...SwaggerUI.serve);
 server.get("/api/docs/", SwaggerUI.setup(apiDocument));
 
 // Management UI
-server.get("/web/*", Restify.plugins.serveStatic({
-  directory: "./out",
-  file: "index.html",
-  appendRequestPath: false
-}));
+server.get("/web/*", Restify.plugins.serveStaticFiles('./out'));
 
 // Healthcheck endpoint
 server.get("/healthcheck", (req, res, next) => {
