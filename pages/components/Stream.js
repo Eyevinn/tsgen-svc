@@ -1,14 +1,17 @@
+import React from 'react';
+
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import BaseAPI from './BaseAPI';
+import BaseAPI from '../../lib/ui_api';
 
-export default class Stream extends BaseAPI {
+export default class Stream extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+    this.api = new BaseAPI();
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -16,7 +19,7 @@ export default class Stream extends BaseAPI {
   componentDidMount() {
     const id = this.props.streamId;
     if (id) {
-      this.getStreamById(id).then(stream => {
+      this.api.getStreamById(id).then(stream => {
         this.setState({ stream: stream });
       })
     }
@@ -32,12 +35,12 @@ export default class Stream extends BaseAPI {
   }
 
   async handleStart() {
-    const newStream = await this.startStream(this.state.stream);
+    const newStream = await this.api.startStream(this.state.stream);
     this.setState({ stream: newStream });
   }
 
   async handleStop() {
-    const newStream = await this.stopStream(this.state.stream);
+    const newStream = await this.api.stopStream(this.state.stream);
     this.setState({ stream: newStream });    
   }
 

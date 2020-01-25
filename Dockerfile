@@ -9,5 +9,6 @@ RUN apt-get install -y --force-yes fonts-freefont-ttf
 ADD . /app
 WORKDIR /app
 RUN npm install
+RUN npm run build
 
 CMD [ "node", "index.js" ]
