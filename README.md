@@ -83,6 +83,36 @@ This software is open source and we welcome contributions.
 
 [MIT License](https://github.com/Eyevinn/tsgen-svc/blob/master/LICENSE)
 
+## Develop and Contribute
+
+1. Fork and clone this repository
+
+2. Build the image as above
+
+3. Run the image in interactive mode and mount the source code directory to `/appdev` in the container.
+
+```
+$ docker run --rm -it -p 8000:3000 -v $PWD:/appdev tsgen-svc:1 /bin/bash
+root@452789bff4ec:/app# cd /appdev
+```
+
+4. Start the backend in development mode (disabling CORS etc)
+
+```
+root@452789bff4ec:/appdev# DEBUG=* NODE_ENV=development node index.js
+  tsgen-svc restify listening at http://[::]:3000
+```
+
+5. Run the frontend (based on React and Next.js) in development mode and point the frontend to use the backend on port `8000` as specified above.
+
+```
+$ NODE_ENV=development API_BASE_URL=http://localhost:8000/api/v1 npm run dev
+```
+
+Then the frontend is available on `http://localhost:3000/` and changes made to the frontend is rebuilt when a file is modifed. The frontend code is found in the folder `pages/` and the backend in `index.js`.
+
+Contribute by submitting a pull request.
+
 ## About Eyevinn Technology
 
 Eyevinn Technology is an independent consultant firm specialized in video and streaming. Independent in a way that we are not commercially tied to any platform or technology vendor.
