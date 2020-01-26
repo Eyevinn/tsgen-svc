@@ -1,0 +1,26 @@
+name: Build and Publish Image to Docker Hub
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Checkout source
+        uses: actions/checkout@v1
+      - name: Build image and publish to registry
+        uses: mr-smithers-excellent/docker-build-push@v1.0
+        with:
+          image: eyevinntechnology/tsgen-svc
+          registry: docker.io
+          tag: ${{ steps.get_version.outputs.VERSION }}
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+
