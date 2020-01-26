@@ -1,19 +1,59 @@
-## Eyevinn Transport Stream Generator
+# Eyevinn Transport Stream Generator
 
-A containerized service that provides the functionality to generate MPEG TS streams.
+The Eyevinn Transport Stream Generator is a containerized microservice based on `ffmpeg` that is used to generate an MPEG TS test stream. For example it can be used as a test source for a streaming video transcoder.
 
-```
-$ docker build -t tsgen-svc:1 .
-$ docker run --rm -d -p 3000:3000 tsgen-svc:1
-```
-
-Web user interface available at `{{BaseURL}}/web/`
+It provides a set of test streams with burned in timecode and current time in the video to make it possible to measure delay and latency. Number of audio streams in a stream can be specified and the number of audio channels in each audio stream.
 
 ![Web GUI](tsgen-gui.png)
 
-API docs (Swagger) available at `{{BaseURL}}/api/docs/`
+## Installation
+
+1. Install Docker Engine on your computer or server. Follow the instructions below to install Docker:
+
+- Docker Desktop for Mac: https://docs.docker.com/docker-for-mac/install/
+- Docker Desktop for Windows: https://docs.docker.com/docker-for-windows/install/
+- Docker Engine CE for Linux (Ubuntu): https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+2. Download the source and Dockerfile
+
+The `$` denotes a command prompt and should not be typed in.
+
+```
+$ git clone git@github.com:Eyevinn/tsgen-svc.git
+```
+
+3. Build Docker image
+
+```
+$ cd tsgen-svc
+$ docker build -t tsgen-svc:1 .
+```
+
+4. Run the Docker container
+
+```
+$ docker run --rm -d -p 3000:3000 tsgen-svc:1
+```
+
+5. Open a browser and go to `http://localhost:3000/web/` assuming that you installed this on your local machine. If not, replace localhost with the IP to the server where the container is running.
+
+To start a test stream specify the following details in the user interface:
+
+```
+Destination Address: <IP address to where to push the stream>
+Destination Port: <Port to receive on>
+Test Source: <Choose one of the availabe types>
+Audio Tracks: <Number of audio streams in the stream>
+Audio Channels: <Number of channels per audio stream>
+```
+
+Then press the START button. Once state is `running` you can for example open VLC on the destination computer and play from `udp://@1230` and watch the stream.
+
+![Screenshot](tsgen-sc.png)
 
 ## API Usage
+
+A control API is provided and API docs (Swagger) available at `{{BaseURL}}/api/docs/`, for example `http://localhost:3000/api/docs/`. Below follow some examples of what can be done with the API.
 
 ### List available stream slots
 
@@ -31,9 +71,6 @@ $ curl -X PUT "http://localhost:3000/api/v1/streams/1" -H "accept: application/j
 
 Open then for example VLC to receive on port 1230
 
-![Screenshot](tsgen-sc.png)
-
-
 ### Stop a stream on slot with ID 1
 
 ```
@@ -42,4 +79,14 @@ $ curl -X PUT "http://localhost:3000/api/v1/streams/1" -H "accept: application/j
 
 ## LICENSE
 
+This software is open source and we welcome contributions.
+
 [MIT License](https://github.com/Eyevinn/tsgen-svc/blob/master/LICENSE)
+
+## About Eyevinn Technology
+
+Eyevinn Technology is an independent consultant firm specialized in video and streaming. Independent in a way that we are not commercially tied to any platform or technology vendor.
+
+At Eyevinn, every software developer consultant has a dedicated budget reserved for open source development and contribution to the open source community. This give us room for innovation, team building and personal competence development. And also gives us as a company a way to contribute back to the open source community. 
+
+Want to know more about Eyevinn and how it is to work here. Contact us at work@eyevinn.se!
