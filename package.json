@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
+    "postversion": "git push --tags",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eyevinn Technology <info@eyevinn.se>",
