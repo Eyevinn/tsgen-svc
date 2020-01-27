@@ -49,6 +49,8 @@ Audio Channels: <Number of channels per audio stream>
 
 Then press the START button. Once state is `running` you can for example open VLC on the destination computer and play from `udp://@1230` and watch the stream.
 
+If you want to try this out on your local machine and is running mac you need to specify `host.docker.internal` as the Destination Address.
+
 ![Screenshot](tsgen-sc.png)
 
 ## API Usage
