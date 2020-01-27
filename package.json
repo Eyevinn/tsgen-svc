@@ -1,6 +1,6 @@
 {
   "name": "@eyevinn/tsgen-svc",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Transport Stream Generator",
   "main": "index.js",
   "scripts": {
