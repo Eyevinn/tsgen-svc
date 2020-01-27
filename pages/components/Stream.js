@@ -6,6 +6,16 @@ import Button from 'react-bootstrap/Button';
 
 import BaseAPI from '../../lib/ui_api';
 
+const TEST_SOURCES = [
+  {
+    id: "testsrc1080p25",
+    description: "1080p25/AVC (tc,pts)"
+  }, {
+    id: "testsrc720p25",
+    description: "720p25/AVC (tc,pts)"
+  }
+];
+
 export default class Stream extends React.Component {
   constructor(props) {
     super(props);
@@ -73,8 +83,9 @@ export default class Stream extends React.Component {
               <Form.Group as={Col} sm={{ span: 6}} controlId={"streamType" + stream.id}>
                 <Form.Label>Test Source</Form.Label>
                 <Form.Control as="select" onChange={this.handleChange} name="type">
-                  <option value="testsrc1080p25">1080p25</option>
-                  <option value="testsrc720p25">720p25</option>
+                  {TEST_SOURCES.map((src, idx) => {
+                    return <option key={idx} value={src.id}>{src.description}</option>
+                  })}
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId={"streamAudioStreams" + stream.id}>
