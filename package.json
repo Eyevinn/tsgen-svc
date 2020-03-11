@@ -12,15 +12,21 @@
   "author": "Eyevinn Technology <info@eyevinn.se>",
   "license": "MIT",
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "bootstrap": "^4.4.1",
     "debug": "^4.1.1",
     "next": "^9.2.1",
+    "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
     "restify": "^8.5.1",
     "restify-cors-middleware": "^1.1.1",
     "restify-errors": "^8.0.2",
-    "swagger-ui-restify": "^3.0.8"
+    "swagger-ui-restify": "^3.0.8",
+    "url-loader": "^3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }
