@@ -23,7 +23,10 @@ export default class Stream extends React.Component {
     super(props);
 
     this.state = {
-      loading: false
+      loading: false,
+      stream: {
+        name: ""
+      }
     };
     this.api = new BaseAPI();
   }
@@ -125,7 +128,7 @@ export default class Stream extends React.Component {
                 label="Audio Tracks"
               />
               <TextInput
-                name="audioChannels"
+                name="channels"
                 stream={stream}
                 handleChange={this.handleChange}
                 label="Audio Channels (per track)"

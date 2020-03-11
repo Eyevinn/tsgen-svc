@@ -7,11 +7,15 @@ const TextInput = ({ name, label, stream, handleChange }) => {
     <Form.Group
       as={Col}
       sm={12}
-      lg={name.includes("audio") ? 6 : 12}
+      lg={name.includes("audio") || name === "channels" ? 6 : 12}
       controlId={name + stream.id}
     >
       <Form.Label>{label}</Form.Label>
-      <Form.Control value={stream[name]} onChange={handleChange} name={name} />
+      <Form.Control
+        value={stream[name] || ""}
+        onChange={handleChange}
+        name={name}
+      />
     </Form.Group>
   );
 };
