@@ -20,4 +20,11 @@ const TextInput = ({ name, label, stream, handleChange }) => {
   );
 };
 
+TextInput.defaultProps = {
+  name: "",
+  label: "",
+  stream: {},
+  handleChange: () => {}
+};
+
 export default TextInput;

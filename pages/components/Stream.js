@@ -24,9 +24,7 @@ export default class Stream extends React.Component {
 
     this.state = {
       loading: false,
-      stream: {
-        name: ""
-      }
+      stream: {}
     };
     this.api = new BaseAPI();
   }
