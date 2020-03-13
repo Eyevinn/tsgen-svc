@@ -1,0 +1,82 @@
+@import "./variables";
+
+body {
+  font-family: "Muli", "Helvetica", "Arial", "sans-serif";
+}
+
+.body {
+  background: $gray;
+  padding-top: 15px;
+  min-height: 100vh;
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .container {
+    padding: 20px 15px;
+  }
+
+  @media screen and(max-width:574px) {
+    padding-top: 0;
+  }
+}
+
+.container {
+  background: $white;
+}
+
+.form-wrapper {
+  width: 70%;
+  margin: 20px auto 0 auto;
+  .status-wrapper {
+    margin-bottom: 10px;
+  }
+  .stream-status {
+    color: $purple;
+    &.running {
+      color: $orange;
+    }
+  }
+}
+
+button {
+  &.btn {
+    padding: 7px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.loading-state {
+      padding: 7px 20px 7px 0;
+    }
+  }
+  .spinner-border {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    border-width: 0.2em;
+  }
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.add-new {
+  width: 70%;
+  margin: 0 auto;
+  .btn {
+    &.btn-add {
+      display: inline-block;
+      background-color: darken($blue, 10);
+      border-color: darken($blue, 10);
+      color: $white;
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: darken($blue, 25);
+        border-color: darken($blue, 25);
+      }
+    }
+  }
+}
