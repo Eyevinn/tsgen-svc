@@ -65,7 +65,7 @@ export default class Stream extends React.Component {
         {stream ? (
           <div className="form-wrapper">
             <Row className="status-wrapper">
-              <Col xs={1}>
+              <Col xs={3} sm={2} xl={1}>
                 ID: <span>{stream.id}</span>
               </Col>
               <Col>
