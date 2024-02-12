@@ -10,6 +10,9 @@ const withSass = require("@zeit/next-sass");
 const withCSS = require("@zeit/next-css");
 module.exports = withCSS(
   withSass({
+    images: {
+      disableStaticImages: true
+    },
     env: env,
     assetPrefix: isProd ? "/web" : "",
     webpack(config, options) {
@@ -22,6 +25,7 @@ module.exports = withCSS(
           }
         }
       });
+      
 
       return config;
     }
